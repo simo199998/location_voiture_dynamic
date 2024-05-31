@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block reservation %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>reservation</title>
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+            
+            <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            
+            
+            
+  
+ 
+   
+<body>
+  
+            <div class="container">
+                        <div class="row justify-content-center">
+                          <div class="col-7">
+                            <h3 style="padding: 7px; font-weight: bold; text-align: center;">Active la reservation</h3>
+                             <p>Bonjours <b><i><strong>M. {{client}}</strong></i></b> Veuillez entrer les informations pour commencer votre réservation</p> 
+                            <form  method="post" enctype="multipart/form-data" >
+                              {% csrf_token %}
+                              
+                              <div style="margin-top: 15px;">
+                                          <label for="{{ reservation_form.date_encharge.id_for_label }}">{{ reservation_form.date_encharge.label }}</label>
+                                          {{ reservation_form.date_encharge }}
+                              </div>
+                              <div style="margin-top: 15px;">
+                                          <label for="{{ reservation_form.date_endepot.id_for_label }}">{{ reservation_form.date_endepot.label }}</label>
+                                          {{ reservation_form.date_endepot }}
+                              </div>
+                               <div>
+                                          <a href="" class="btn btn-outline-success" id="btn-cata" style="margin-top: 15px; margin-bottom: 10px;">choise votre voiture</a>
+                               </div>
+                               
+                              <div style="margin-top: 15px;">
+                                          <label for="{{ reservation_form.matricule.id_for_label }}">{{ reservation_form.matricule.label }}</label>
+                                          {{ reservation_form.matricule }}
+                              </div>
+                              <div>
+                                          <label for="{{ reservation_form.totalprix.id_for_label }}">{{ reservation_form.totalprix.label }}</label>
+                                          {{ reservation_form.totalprix }}
+                              </div>
+                              <div style="margin-top: 15px;">
+                                <label for="{{ reservation_form.matricule.id_for_label }}">{{ reservation_form.image_permit.label }}</label>
+                                {{ reservation_form.image_permit }}
+                              </div>
+                              <div style="margin-top: 15px;">
+                                    <label for="{{ reservation_form.available.id_for_label }}">{{ reservation_form.available.label }}</label>
+                                    {{ reservation_form.available }}
+                                  </div>
+                              <button type="submit" style="margin-top: 15px;" class="btn btn-success w-100" id="validebtn">submite</button>
+                  </form>
+                          </div>
+                        </div>
+            </div>
+            
+          
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        const requiredFields = ['date_encharge', 'date_endepot', 'matricule', 'totalprix'];
+        let valid = true;
+
+        requiredFields.forEach(function (fieldName) {
+            const field = document.querySelector(`[name="${fieldName}"]`);
+            if (!field.value) {
+                valid = false;
+                field.classList.add('is-invalid');
+                const errorSpan = document.createElement('span');
+                errorSpan.className = 'invalid-feedback';
+                errorSpan.innerText = 'Ce champ est obligatoire.';
+                field.parentNode.appendChild(errorSpan);
+            }
+        });
+
+        const checkbox = document.querySelector('input[name="available"]');
+        if (!checkbox.checked) {
+            valid = false;
+            checkbox.classList.add('is-invalid');
+            const errorSpan = document.createElement('span');
+            errorSpan.className = 'invalid-feedback';
+            errorSpan.innerText = 'Vous devez sélectionner la case pour continuer.';
+            checkbox.parentNode.appendChild(errorSpan);
+        }
+
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+});
+          //
+          document.addEventListener("DOMContentLoaded", function() {
+            // Récupération des éléments du DOM
+            var dateEnchargeInput = document.getElementById('{{ reservation_form.date_encharge.id_for_label }}');
+            var dateDepotInput = document.getElementById('{{ reservation_form.date_endepot.id_for_label }}');
+            
+            
+            var btnCata = document.getElementById('btn-cata');
+            btnCata.onclick = function(event) {
+                event.preventDefault(); 
+                var encharge = dateEnchargeInput.value;
+                var depot = dateDepotInput.value;
+                var numberJour = (new Date(depot) - new Date(encharge)) / 1000 / 60 / 60 / 24;
+                var numberJourInt = Math.round(numberJour);
+                console.log("Nombre de jours:", numberJourInt);
+                sessionStorage.setItem('dateencharge', encharge);
+                sessionStorage.setItem('datedepot', depot);
+                sessionStorage.setItem('numberJourInt', numberJourInt);
+                window.location.href = "{% url 'catalogue' %}";
+                currenteurl=window.location.href
+                sessionStorage.setItem('url',currenteurl)
+            };
+        });
+          
+        window.onload = function() {
+            var prix = sessionStorage.getItem('prix');
+            var matricule = sessionStorage.getItem('matricule');
+            var jours = sessionStorage.getItem('numberJourInt');
+            var total = prix * jours;
+
+            var dateEnchargeInput = document.getElementById('{{ reservation_form.date_encharge.id_for_label }}');
+            dateEnchargeInput.value = sessionStorage.getItem('dateencharge');
+
+            var dateDepotInput = document.getElementById('{{ reservation_form.date_endepot.id_for_label }}');
+            dateDepotInput.value = sessionStorage.getItem('datedepot');
+
+            var total_jour = document.getElementById('{{ reservation_form.totalprix.id_for_label }}');
+            total_jour.value = total;
+
+            var input_matricule = document.getElementById('{{ reservation_form.matricule.id_for_label }}');
+            input_matricule.value = matricule;
+        }
+          var validebtn=document.getElementById('validebtn')
+          validebtn.onclick=function(){
+            sessionStorage.clear()
+          }
+          
+        
+          </script>
+
+
+
+
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+
+
+
+
+
+
+<script src="{% static 'js/main.js' %}"></script>
+            
+</body>
+</html>
+{% endblock reservation %}

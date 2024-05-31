@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>contrat</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <style>
+            body { font-family: Arial, sans-serif; }
+            .contract { margin: 20px; }
+            .header { text-align: center; margin-bottom: 40px; }
+            .details { margin-bottom: 20px; }
+            .tete{
+                width: 100%; height: 25px; background-color: black; color: white; padding: 7px;
+                font-weight: bold; font-size: 18px;
+            }
+            .x{
+                font-weight: bold;
+            }
+            .content{
+                padding: 4px;
+                margin: 0px 10px 15px 10px;
+                font-size: 16px;
+            }
+
+        </style>
+
+</head>
+<body>
+    
+
+            <div class="contract">
+                        <div class="header">
+                            <h1 style="font-weight: bold; font-size: 25px;">CONTRAT DE LOCATION DE VEHICULE</h1>
+                        </div>
+                        <div class="tete" >CONDUCTEUR LOCATAIRE (LE CLIENT)</div>
+                        <div class="content">
+                            <span class="x">Nom et Prenom :</span>&nbsp;&nbsp; {{ client.nom }} {{ client.prenom }}
+                            <br>
+                            <span class="x">Adresse :</span>&nbsp;&nbsp;{{ client.adresse }}
+                            <br>
+                            <span class="x">Adresse email :</span>&nbsp;&nbsp; {{ client.email }}
+                            <br>
+                            <span class="x">N° TEL :</span>&nbsp;&nbsp;{{ client.phone }}
+                            <br>
+                            <span class="x">N° Carte Nationale d’identité :</span>&nbsp;&nbsp; {{ client.cin }} 
+                            <br>
+                            <span class="x">N° Permis</span> : 12345234 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="x">Date d’obtention</span> : {{ client.delevrence }}
+                            <br>
+                            <span class="x">Piece justification:</span>
+                            <br><br>
+                            {% if base64_image %}
+                            <img src="data:image/jpeg;base64,{{ base64_image }}" alt="Permit" width="400px" height="200px">
+                            {% endif %}
+
+                        </div>
+                        <div class="tete" >Renseignements concernant le véhicule</div>
+                        <div class="content">
+                            <span class="x">Marque et type de véhicule :</span> &nbsp;&nbsp; {{ voiture.marque }} & {{ voiture.type }}
+                            <br>
+                            <span class="x">Immatriculation :</span> &nbsp;&nbsp; {{ reservation.matricule }}
+                            <br>
+                            <span class="x">Date de départ :</span>{{ reservation.date_encharge }} &nbsp;&nbsp; <span class="x"> Heure de départ :</span>............&nbsp;&nbsp;<span class="x">KM de départ :</span>...........
+                            <br>
+                            <span class="x">Date de retour :</span>{{ reservation.date_endepot }} &nbsp;&nbsp; <span class="x"> Heure de retour :</span>............&nbsp;&nbsp;<span class="x">KM de retour :</span>...........
+                            <span class="x">Prix voiture/jour :</span>&nbsp;&nbsp;700 DH &nbsp;&nbsp; <span class="x"> N° jours : </span>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="x">Total :</span>&nbsp;&nbsp;{{ reservation.totalprix }}
+                        </div>
+                        <div class="tete" >CAUTION (VALEUR DE LA FRANCHISE)</div>
+                        <div class="content">
+                            <span class="x">CB(encaissé) :</span>&nbsp;70000 DH &nbsp;&nbsp; <span class="x"> Chèque : </span>36535 &nbsp;&nbsp;<span class="x"> Total caution =</span>34833&nbsp;&nbsp;<span class="x"> C.N.I N° =</span>
+                            <p>Le client utilisera le véhicule loué avec soin, réglera tous frais, amendes et dépenses pour toutes infraction s à la circulation au stationnement, etc… Le client n’est pas autorisé à effectuer de répara on sur le véhicule à l’exception on des frais consécutifs à : crevaison, pannes d’électricité.</p>
+                            <span>Date et heure de livraison du véhicule</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Date et heure de livraison du véhicule</span>
+                            <br>
+                            <span>Signature Loueur</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Signature Client</span>
+                        </div>
+                        <h1 style="font-weight: bold; font-size: 18px; text-align: center;">Conditions Générales de location de Véhicules utilitaires</h1>
+                        <div class="content">
+                            
+
+                        </div>
+                        
+            </div>
+
+
+<script src="{% static 'administration/js/jquery.min.js' %}"></script>
+<script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+<script src="{% static 'administartion/js/Chart.min.js' %}"></script>
+
+</body>
+</html>

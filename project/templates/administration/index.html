@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Administration  </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <style>
+    .navbar{
+      margin-top: 0px;
+      background-color: green;
+      height: 80px;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="main-wrapper">
+    
+    <div class="template-page-wrapper">
+      <div class="navbar-collapse collapse templatemo-sidebar">
+        <ul class="templatemo-sidebar-menu">
+          <li>
+            <img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 2.5; margin-left: 50px;" >
+          </li>
+          <li ><a href="{% url 'reservation_statistiques' %}"><i class="fa-solid fa-chart-simple"></i>tableau de bord</a></li>
+          <li class="active" ><a href="{% url 'index' %}"><i class="fa fa-home"></i>home</a></li>
+          <li><a href="{% url 'demmande' %}"><i class="fa-sharp fa-solid fa-bell"></i><span class="badge pull-right">3</span> Demmandes des reservation</a></li>
+          
+          <li><a href="{% url 'ajoute_voiture' %}"><i class="fa-solid fa-plus"></i>Ajoute une nouveau voitures</a></li>
+          <li><a href="{% url 'voitures' %}"><i class="fa-solid fa-car"></i>Les voitures</a></li>
+          <li><a href="{% url 'document_vehicule_view' %}"><i class="fa-sharp fa-solid fa-file"></i>Les documents</a></li>
+          <li><a href=""><i class="fa fa-cog"></i>les clients</a></li>
+          
+          <li><a href="" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+        </ul>
+      </div>
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+         
+          <div class="row margin-bottom-30">
+            <div class="col-md-12">
+              <ul class="nav nav-pills">
+                <li class="active"><a href="#">creation nouveau demmande <span class="badge">42</span></a></li>
+                <li><a href="#">Commande Active <span class="badge">{{commande_count}}</span></a></li>
+                <li><a href="#">Total voitures disponible <span class="badge"> {{available_count}} </span></a></li>
+              </ul>          
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-md-12">
+              <div class="btn-group pull-right" id="templatemo_sort_btn">
+                <button type="button" class="btn btn-default">Sortez par</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Nom</a></li>
+                  <li><a href="#">Prenom</a></li>
+                  <li><a href="#">Numero CIN</a></li>
+                  <li><a href="#">Numero du Voiture</a></li>
+                </ul>
+              </div>
+              
+              <div class="table-responsive">
+                <h4 class="margin-bottom-15">voitures indisponible</h4>
+                <table class="table table-striped table-hover table-bordered">
+                  <thead>
+                    <tr>
+                      <th>order</th>
+                      <th>Nom</th>
+                      <th>Prenom</th>
+                      <th>Numero CIN</th>
+                      <th>Email</th>
+                      <th>Marque</th>
+                      <th>Matricule</th>
+                      <th>date de retour</th>
+                      <th>Edit</th>
+                      <th>update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Boucle principale pour les commandes -->
+                    {% for i in commande %}
+                    {% if i.available %}
+                    <tr>
+                      <td></td>
+                      <td>{{ i.client.nom }}</td>
+                      <td>{{ i.client.prenom }}</td>
+                      <td>{{ i.client.cin }}</td>
+                      <td>{{ i.client.email }}</td>
+                      <td>{{ i.voiture.marque }}</td>
+                      <td>{{ i.matricule }}</td>
+                      <td>{{ i.date_endepot }}</td>
+                      <td><a href="{% url 'download_contract' i.pk %}">telecharger contrat</a></td>
+                      <td><button class="btn btn-link" data-toggle="modal" data-target="#updateModal{{ i.pk }}">update</button></td>
+                      <td><a href="#" class="btn btn-link">delete</a></td>
+                    </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="updateModal{{ i.pk }}" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel{{ i.pk }}" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="updateModalLabel{{ i.pk }}">Update Dates</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form method="post" action="{% url 'update_dates' i.pk %}">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                <label for="date_encharge_{{ i.pk }}">Date encharge</label>
+                                <input type="date" class="form-control" id="date_encharge_{{ i.pk }}" name="date_encharge" value="{{ i.date_encharge|date:'Y-m-d' }}">
+                              </div>
+                              <div class="form-group">
+                                <label for="date_endepot_{{ i.pk }}">Date endepot</label>
+                                <input type="date" class="form-control" id="date_endepot_{{ i.pk }}" name="date_endepot" value="{{ i.date_endepot|date:'Y-m-d' }}">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}                  
+                  </tbody>
+                </table>
+                
+                
+              </div>
+              <div class="table-responsive">
+                <h4 class="margin-bottom-15">les voitures disponible</h4>
+                <table class="table table-striped table-hover table-bordered">
+                  <thead>
+                    
+                    <tr>
+                      <th>matricule</th>
+                      <th>marque</th>
+                      <th>type</th>
+                      <th>puissance</th>
+                      <th>model</th>
+                      <th>boite vitesse</th>
+                      <th>type carburant</th>
+                      <th>disponibilite</th>
+                      <th>edite</th>
+                      <th>Delete</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in voiture_dispo %}
+                    {% if i.disponibilite == 'OUI' or i.disponibilite == 'oui' %}
+                    <tr>
+                      <td>{{i.matricule}}</td>
+                      <td>{{i.marque}}</td>
+                      <td>{{i.type}}</td>
+                      <td>{{i.puissance_fiscale}}</td>
+                      <td>{{i.model}}</td>
+                      <td>{{i.boite_vitesse}}</td>
+                      <td>{{i.type_carburant}}</td>
+                      <td class="dispo" style="font-size: 16px; font-weight:bold; color: green;">{{i.disponibilite}}</td>
+                      <td><a href="#" class="btn btn-default">Edit</a></td>
+                      <td><a href="#" class="btn btn-link">Delete</a></td>
+                    </tr>
+                    {% endif %} 
+                    {% endfor  %}
+                  </tbody>
+                </table>
+              </div>
+              <ul class="pagination pull-right">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+            </div>
+            <div class="modal-footer">
+              <a href="sign-in.html" class="btn btn-primary">Yes</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="templatemo-footer" 
+      >
+        <div class="templatemo-copyright">
+          <p>Copyright &copy; 2084 Your Company Name</p>
+        </div>
+      </footer>
+    </div>
+</div>
+  <SCript>
+    let dispo=document.getElementsByClassName('disponibilite');
+    
+    for(i=0;i<=dispo.length;i++){
+      if(dispo[i].innerHTML=='oui'){dispo[i].style.color="green"}
+      else{dispo[i].style.color="red"}}
+  </SCript>
+    <script src="{% static 'administration/js/jquery.min.js' %}"></script>
+    <script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+  <title>notification</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+<style>
+  .navbar{
+      margin-top: 0px;
+      background-color: green;
+      height: 80px;
+    }
+  </style>
+</style>
+</head>
+<body>
+  
+  <div class="template-page-wrapper">
+    <div class="navbar-collapse collapse templatemo-sidebar">
+      <ul class="templatemo-sidebar-menu">
+        <li>
+          <img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 2.5; margin-left: 50px;" >
+        </li>
+        <li ><a href="{% url 'reservation_statistiques' %}"><i class="fa-solid fa-chart-simple"></i>tableau de bord</a></li>
+        <li ><a href="{% url 'index' %}"><i class="fa fa-home"></i>home</a></li>
+        <li><a href="{% url 'demmande' %}"><i class="fa-sharp fa-solid fa-bell"></i><span class="badge pull-right">3</span> Demmandes des reservation</a></li>
+        
+        <li><a href="{% url 'ajoute_voiture' %}"><i class="fa-solid fa-plus"></i>Ajoute une nouveau voitures</a></li>
+        <li><a href="{% url 'voitures' %}"><i class="fa-solid fa-car"></i>Les voitures</a></li>
+        <li><a href="{% url 'document_vehicule_view' %}"><i class="fa-sharp fa-solid fa-file"></i>Les documents</a></li>
+        <li><a href=""><i class="fa fa-cog"></i>les clients</a></li>
+        
+        <li><a href="" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+      </ul>
+    </div><!--/.navbar-collapse -->
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+          <div class="row">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="btn-group pull-right" id="templatemo_sort_btn">
+                  <button type="button" class="btn btn-default">Sortez par</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">marque</a></li>
+                    <li><a href="#">type</a></li>
+                    <li><a href="#">matricules</a></li>
+                    
+                </div>
+                <div class="table-responsive">
+                  <h4 class="margin-bottom-15">Approve Reservation for {{ reservation.client.nom }} {{ reservation.client.prenom }}</h4>
+                  <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" name="approve" class="btn btn-success">Approve</button>
+                        <button type="submit" name="disapprove" class="btn btn-danger">Disapprove</button>
+                    </form>
+                </div>
+      
+      
+      
+    </div>
+    
+
+<script src="{% static 'administration/js/jquery.min.js' %}"></script>
+<script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+<script src="{% static 'administartion/js/Chart.min.js' %}"></script>
+    
+    
+   
+ 
+</body>
+</html>

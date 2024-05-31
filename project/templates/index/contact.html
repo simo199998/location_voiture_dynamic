@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block contact %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>contactez-nous</title>
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            
+            <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            <script src="{% static 'js/owl.carousel.js' %}"></script>
+</head>
+<body>
+            <div class="container"  style="height: 500px; ">
+                        <div class="row  bg-success h-100" >
+                                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
+                                                <div class="carousel-indicators">
+                                                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                                </div>
+                                                <div class="carousel-inner position-relative" style="overflow: hidden;" >
+                                                  <div class="carousel-item active" >
+                                                    <div class="col-12" style="overflow: hidden;"><img src="images/clienthappy.jpeg" class="d-lg-block w-100 " alt="..." style=" height: 500px; overflow: hidden;"></div>
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                      
+                                                      <p style="color:white;">Choisissez la liberté, choisissez la flexibilité, choisissez la location de voitures qui vous mène où vous voulez aller..</p>
+                                                      <p><a class="btn btn-lg btn-outline-success" href="noveau_reservation.html" style="font-weight: bold; border:#21D192  solid 3px;">réserver maintenant</a></p>
+                                                    </div>
+                                                  </div>
+                                                  <div class="carousel-item">
+                                                    <img src="images/satisfclinet.jpeg" class="d-block w-100" alt="..." style=" height: 500px; overflow: hidden;">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                      
+                                                      <p>De l'accueil chaleureux lors de la prise en charge à l'assistance routière 24/7 en cas de besoin</p>
+                                                      <p><a class="btn btn-lg btn-outline-success" href="noveau_reservation.html" style="font-weight: bold; border:#21D192  solid 3px;">réserver maintenant</a></p>
+                                                    </div>
+                                                  </div>
+                                                  <div class="carousel-item">
+                                                    <img src="images/slidebmw.jpeg" class="d-block w-100" alt="..." style=" height: 500px; overflow: hidden;">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                      
+                                                      <p>Avec notre service de location de voitures, chaque destination devient une possibilité à explorer.</p>
+                                                      <p><a class="btn btn-lg btn-outline-success" href="noveau_reservation.html" style="font-weight: bold; border:#21D192  solid 3px;">réserver maintenant</a></p>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                  <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                  <span class="visually-hidden">Next</span>
+                                                </button>
+                                    </div>
+                        </div>
+            </div>
+            <div class="container" style="margin-top: 60px;">
+                        <div class="row">
+                                    <div class="col-4">
+                                                <div class="card-body w-100" style="border: solid 1px gray; padding: 7px; margin-bottom: 30px; border-radius: 10px;">
+                                                            <h4 class="card-subtitle mb-2 text-muted" id="contact" style="font-weight: bold;"><i class="fa-regular fa-map"></i> &nbsp; Adresse:</h4>
+                                                            <p class="card-text" style="margin-left: 35px; font-size: 16px; font-weight: bold;">198 West 21th Street, Suite 721 New York NY 10016</p>
+                                                 </div>
+                                                 <div class="card-body w-100" style="border: solid 1px gray; padding: 7px; margin-bottom: 30px; border-radius: 10px;">
+                                                            <h4 class="card-subtitle mb-2 text-muted" id="contact" style="font-weight: bold;"><i class="fa-solid fa-phone"></i> &nbsp;Phone:</h4>
+                                                            <p class="card-text" style="margin-left: 35px; font-size: 20px; font-weight: bold; text-wrap: wrap;">+212537445666</p>
+                                                 </div>
+                                                 <div class="card-body w-100" style="border: solid 1px gray; padding: 7px; margin-bottom: 30px; border-radius: 10px;">
+                                                            <h4 class="card-subtitle mb-2 text-muted" id="contact"style="font-weight: bold;"><i class="fa-solid fa-envelope"></i> &nbsp;E-mail:</h4>
+                                                            <p class="card-text" style="margin-left: 35px; font-size: 18px; font-weight: bold; ">CarRental@gmail.com</p>
+                                                 </div>
+                                    </div>
+                                    <div class="col-8" style="padding: 10px;">
+                                                <div class="row" style="padding: 10px;">
+                                                            <div class="mb-3">
+                                                                   <input type="email" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="name@example.com">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                        <input class="form-control form-control-lg" type="text" placeholder="Votre Nom" aria-label=".form-control-lg example">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                        <input class="form-control form-control-lg" type="text" placeholder="Subject" aria-label=".form-control-lg example">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                        <textarea class="form-control " id="exampleFormControlTextarea1"placeholder="Messages" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                        <button class="btn btn-primary btn-lg w-50" type="submit">envoye message</button>
+                                                            </div>
+                                                </div>
+                                    </div>
+                        </div>
+            </div>
+
+
+            <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+            <script src="{% static 'js/bootstrap.min.js' %}"></script>
+            <script src="{% static 'js/cheatsheet.js' %}"></script>
+            <script src="{% static 'js/form-validation.js' %}"></script>
+            <script src="{% static 'js/script.js' %}"></script>
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+              <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+               <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+              <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+              <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+              <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+              <script src="{% static 'js/aos.js' %}"></script>
+              <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+              <script src="{% static 'js/scrollax.min.js' %}"></script>
+              <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+{% endblock contact %}

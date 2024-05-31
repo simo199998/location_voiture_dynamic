@@ -1,0 +1,332 @@
+<form method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {{ form_client.as_p }}
+                      {{ user_form.as_p }}
+                      <div>
+                          <label for="{{ reservation_form.date_encharge.id_for_label }}">{{ reservation_form.date_encharge.label }}</label>
+                          {{ reservation_form.date_encharge }}
+                      </div>
+                      <div>
+                          <label for="{{ reservation_form.date_endepot.id_for_label }}">{{ reservation_form.date_endepot.label }}</label>
+                          {{ reservation_form.date_endepot }}
+                      </div>
+                      
+                      <div>
+                          <label for="{{ reservation_form.matricule.id_for_label }}">{{ reservation_form.matricule.label }}</label>
+                          {{ reservation_form.matricule }}
+                      </div>
+                      <div>
+                          <label for="{{ reservation_form.totalprix.id_for_label }}">{{ reservation_form.totalprix.label }}</label>
+                          {{ reservation_form.totalprix }}
+                      </div>
+                      <button type="submit">Réserver</button>
+                  </form>
+
+
+
+
+                  if request.method == 'POST':
+        form = ClientForm(request.POST, request.FILES)
+        print(form)
+        reservation_form = CommandeReservationForm(request.POST)
+        user_form = UserForm(request.POST)
+
+        if form.is_valid() and reservation_form.is_valid() and user_form.is_valid():
+            client = form.save()
+            reservation = reservation_form.save(commit=False)
+            reservation.client = client
+            reservation.save()
+
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])  # Hash the password before saving
+            user.save()
+
+            return redirect('home')  # Replace with your success URL
+    else:
+        form = ClientForm()
+        reservation_form = CommandeReservationForm()
+        user_form = UserForm()
+
+
+
+
+
+
+    
+
+
+
+        <!--<form action="" method="post">
+                    {%for i in x%}
+                      {{ i.image_permit.url }}
+                      {% endfor%}
+                    </form>
+                    <form class="needs-validation" novalidate method="post" enctype="multipart/form-data" >
+                      {% csrf_token %}
+                      
+                        <h4 class="mb-3" style="font-weight: bold; margin-top: 15px;">reservation voiture</h4>
+                      <div class="col-sm-6">
+                        <label for="encharge" class="form-label">date de prise en charge:(aaaa-mm-jj)</label>
+                        <input type="date" class="form-control" id="encharge"  name="ajdateencharge" required>
+                        <div class="invalid-feedback">
+                          ce champ est obligatoire..
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="depot" class="form-label">date de depot:(aaaa-mm-jj)</label>
+                        <input type="date" class="form-control"  id="depot" name="ajdatedepot" required>
+                        <div class="invalid-feedback">
+                          ce champ est obligatoire..
+                        </div>
+                      </div>
+                      
+                      <div class="col-sm-6">
+                        <label for="client" style="margin-top: 15px;" class="form-label">selectionez votre coiture</label>
+                        <div style="margin-top: 7px;"><a href="{% url 'catalogue' %}"  class="btn btn-outline-success" id="btn-cata" onclick="calculejour()" >catalogue</a></div>
+                        <label for="voitureselectionee" style="margin-top: 7px;" class="form-label">votre voiture qui est reserve:</label>
+                        <input type="text" class="form-control" id="voitureselectionee" name="voitureselectionee" required style="margin-bottom:15px ;">
+                        <div class="invalid-feedback">
+                          ce champ est obligatoire.
+                        </div>
+                      </div>
+                      <div class="col-sm-6" style="margin-bottom: 15px;">
+                        <label for="total" class="form-label">total payee est:</label>
+                        <input type="text" class="form-control" id="total"  name="totalpayee" readonly required>
+                        
+                      </div>
+                      -->
+                      <h4 class="mb-3" style="font-weight: bold;">Information client</h4>
+                      <div class="row g-3">
+                        <div class="col-sm-6">
+                          <label for="firstName" class="form-label">Nom</label>
+                          <input type="text" class="form-control" id="firstName" name="ajnom" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                        </div>
+            
+                        <div class="col-sm-6">
+                          <label for="lastName" class="form-label">Prenom</label>
+                          <input type="text" class="form-control" id="lastName"name="ajprenom" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="cin" class="form-label">Numero du carte CIN:</label>
+                          <input type="text" class="form-control" id="cin" name="ajcin" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="permit" class="form-label">Numero du permit conduite</label>
+                          <input type="text" class="form-control" id="permit" name="ajpermit" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="naissance" class="form-label">date de naissance:</label>
+                          <input type="date" class="form-control" id="naissance" name="ajnaissance"   required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                          {% if msg %}
+                          <div style="margin-top: 15px;"><p style="color: red; font-size: 16px; font-weight: bold;"> {{msg}} </p></div>
+                          {% endif %}
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="delevrence" class="form-label">date delevrence permit</label>
+                          <input type="date" class="form-control" id="delevrence" name="ajdelevrence" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                          </div>
+                          {% if msg %}
+                          <div style="margin-top: 15px;"><p style="color: red; font-size: 16px; font-weight: bold;"> {{msgpermit}} </p></div>
+                          {% endif %}
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="E-mail" class="form-label">E-mail</label>
+                          <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control" id="E-mail" name="ajemail"  required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="email" class="form-label">conferme E-mail</label>
+                          <input type="email" class="form-control" id="email" name="ajemailcfr" placeholder="1234 Main St" required>
+                          <div class="invalid-feedback">
+                            s'il vous plait conferme votre adresse email.
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="psw" class="form-label">mode de passe</label>
+                          
+                          <input type="password" id="psw" class="form-control"  name="ajpsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                          <div id="message">
+                            <h5>Password must contain the following:</h5>
+                            <p id="letter" class="invalid"> des<b>letters</b> minuscules</p>
+                            <p id="capital" class="invalid">des <b>letters</b> majiscules</p>
+                            <p id="number" class="invalid">des <b>number</b></p>
+                            <p id="length" class="invalid">au mois <b>8 caracters</b></p>
+                          </div>
+                          
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="psw1" class="form-label">confirme mode de passe</label>
+                          <input type="password" class="form-control" id="psw1" name="ajpswcfr" value="" required>
+                          <div  class="correct1" id="correct">
+                            mode de passe valide.
+                          </div>
+                          <div class="incorrect1" id="incorrect">
+                            mode de passe non valide.
+                          </div>
+                          {% if msg %}
+                          <div style="margin-top: 15px;"><p style="color: red; font-size: 16px; font-weight: bold;"> {{msgpsw}} </p></div>
+                          {% endif %}
+                        </div>
+                        <div class="col-12">
+                          <label for="phone" class="form-label">Numero  du telephone:</label>
+                          <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                            <input type="text" class="form-control" id="phone" name="ajphone" placeholder="+212 608428603" required>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire.
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="address" class="form-label">Addresse personnel</label>
+                          <input type="text" class="form-control" id="address" name="ajadresse" required>
+                          <div class="invalid-feedback">
+                            s'il vous plait entrez votre adresse personnel.
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                          <input type="text" class="form-control" id="address2" name="ajadresse2" >
+                        </div>
+            
+                        <div class="col-md-5">
+                          <label for="country" class="form-label">pays</label>
+                          <select class="form-select" id="country" name="ajpays" required>
+                            <option value="">Choose...</option>
+                            <option>Maroc</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            ce champ est obligatoire..
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <label for="carte" class="form-label">importe une image du carte permit conduite</label>
+                          <input type="file" class="form-control" id="carte" name="ajimagecarte" required multiple>
+                          <div class="invalid-feedback">
+                            photo du carte permit est obligatoire.
+                          </div>
+                        </div>
+                        
+                      </div>
+            
+                      <hr class="my-4">
+                      <div style="margin-top:15px ;">
+                        
+                      
+                        <div >
+                         
+                         <button class="btn btn-outline-success w-25" id="validebtn" style="margin-right: 30px;" >envoyee</button> <button class="btn btn-outline-danger w-25" type="reset">retour</button>
+                         
+                        </div>
+                      </div>-->
+
+                    
+
+
+
+
+                      def register(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        client_form = ClientForm(request.POST, request.FILES)
+        
+        if user_form.is_valid() and client_form.is_valid():
+            user = user_form.save()
+            user.refresh_from_db()  # Load the profile instance created by the signal
+            client = client_form.save(commit=False)
+            client.user = user
+            client.save()
+            username = user_form.cleaned_data.get('username')
+            password = user_form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('sign')  # Replace with your desired redirect URL
+    else:
+        user_form = UserForm()
+        client_form = ClientForm()
+    
+    return render(request, 'index/register.html', {'user_form': user_form, 'client_form': client_form})
+
+class CustomLoginView(LoginView):
+    template_name = 'index/login.html'
+
+def custom_login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('profile')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'index/login.html', {'form': form})
+
+@login_required
+def profile_view(request):
+    return render(request, 'accounts/profile.html')
+
+
+
+
+    class UserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ['nom', 'prenom', 'cin', 'naissance', 'permit', 'delevrence', 'adresse', 'adresse2', 'pays', 'phone', 'image_user']
+
+
+
+
+
+        class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='client_profile')
+    nom = models.CharField(max_length=20)
+    prenom = models.CharField(max_length=20)
+    cin = models.CharField(max_length=20)
+    naissance = models.DateField()
+    permit = models.CharField(max_length=20)
+    delevrence = models.DateField()
+    email = models.CharField(max_length=30)
+    adresse = models.CharField(max_length=50)
+    adresse2 = models.CharField(max_length=50, blank=True, null=True)
+    pays = models.CharField(max_length=10)
+    phone = models.CharField(max_length=20)
+    image_user = models.ImageField(upload_to='user/%y/%m/%d', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.nom} {self.prenom}"

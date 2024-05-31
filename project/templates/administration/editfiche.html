@@ -1,0 +1,470 @@
+<!--{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>profile</title>
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+            
+            <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            
+            
+            
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            
+   
+    <style>
+            .form-control-plaintext{
+              background-color: white;
+            }
+            #x{
+              font-size: 14px;
+            }
+    </style>
+ 
+    
+<body>
+  <div class="container">
+    <div class="row ">
+                <div class="col-4 " >
+                            <div class="row " style="background-color:#21D192 ;">
+                                        <div class="col-12 " style="padding: 15px 15px 15px 15px; text-align: center; " ><img src="images/team-2.jpg" class="img-thumbnail" alt="..." style="border-radius: 50%;width: 140px; height: 140px; margin: 0px 0px 0px; ;"></div>
+                                        <h5 style="text-align: center; " >boulakboud Mohamed</h5>
+                                        <p style="text-align: center; font-size: 13px;">CarRental@example.com</p>
+                            </div>
+                            <div class="row " style="background-color: #0A1828; color: white;">
+                                        <div   id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                                    <i class="fa-solid fa-user"></i>&nbsp; Profile
+                                        </div>
+                                        <div   id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                                    <i class="fa-solid fa-calendar"></i>&nbsp; calendrier
+                                        </div>
+                                        <div class="edit-profile"  id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp; edit profile
+                                        </div>
+                                        <div onclick="imprimerPartie()"  id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                                    <i class="fa-solid fa-download"></i>&nbsp; contrat
+                                        </div>
+                                        <div   id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                                    <i class="fa-solid fa-dollar-sign"></i>&nbsp; La facture
+                                        </div>
+                                       
+                                        <div   id="profile-icon" style="padding: 15px; border-bottom: 1px solid gray; cursor: pointer;">
+                                                  
+                                                  <a class="btn " data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="color: white;">
+                                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;&nbsp;augmente le reservation
+                                                  </a>
+                                                  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                                    <div class="offcanvas-header">
+                                                      <h5 class="offcanvas-title" id="offcanvasExampleLabel">augmente le reservation</h5>
+                                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="offcanvas-body">
+                                                      <div>
+                                                        <form action="" method="">
+                                                          <label for="ugmente_voiture" class="form-label">La voiture :</label>
+                                                          <input type="text" class="form-control" name="augmente_voiture" readonly style="margin-bottom: 10px;">
+                                                          <label for="augmente_matricule" class="form-label">La matricule :</label>
+                                                          <input type="text" class="form-control" name="augmente_matricule" readonly style="margin-bottom: 10px;">
+                                                          <label for="prix/jour" class="form-label">Le prix/jour :</label>
+                                                          <input type="text" class="form-control" name="augmente_prixjour" readonly style="margin-bottom: 10px;">
+                                                          <label for="firstName" class="form-label">La date debut :</label>
+                                                          <input type="text" class="form-control" name="augmente_debut" style="margin-bottom: 10px;">
+                                                          <label for="firstName" class="form-label">La date fine :</label>
+                                                          <input type="text" class="form-control" name="augmente_fine" style="margin-bottom: 10px;" >
+                                                          
+                                                          
+                                                          <label for="totalaugmente" class="form-label">Total prix :</label>
+                                                          <input type="text" class="form-control" name="augmente_total" readonly style="margin-bottom: 10px;">
+                                                          <button type="submit" class="btn btn-success">submite</button>
+                                                        </form>
+                                                      </div>
+                                                      
+                                                    </div>
+                                                  </div>
+                                        </div>
+                                      
+                                        <div   id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                          <i class="fa-solid fa-file"></i>&nbsp; fiche de client
+                                        </div>
+                                        <div   id="profile-icon" style="padding: 20px; border-bottom: 1px solid gray; cursor: pointer; margin-left: 5px;">
+                                          <i class="fa-solid fa-pause"></i>&nbsp; arrite la reservation
+                                        </div>
+                                        
+                                        
+                            </div>
+                </div>
+                <div class="col-8 " style="padding: 10px; background-color:whitesmoke ; color: #0A1828;">
+                    <form class="needs-validation" novalidate method="post">
+                      {% csrf_token %}
+                      <h4 style="text-align: center; padding: 7px;">Donnes du client</h4>
+                        <div class="row g-3">
+                          <div class="col-sm-6">
+                            <label for="firstName" class="form-label">Nom :</label>
+                            <input type="text" class="form-control" id="firstName" name="vnom" value="{{nom}}" readonly  required>
+                            
+                          </div>
+              
+                          <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Prenom :</label>
+                            <input type="text" class="form-control" id="lastName" name="vprenom" readonly value="{{prenom}}" required>
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="cin" class="form-label">Numero du carte CIN ou passeport :</label>
+                            <input type="text" class="form-control" id="cin" name="vcin" value="{{cin}}" readonly  required>
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="permit" class="form-label">Numero du permit conduite</label>
+                            <input type="text" class="form-control" id="permit" name="vpermit" value="{{permit}}" readonly  required>
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="naissance" class="form-label">Date du naissance:</label>
+                            <input type="text" class="form-control" id="naissance" name="vnaissance" value="{{naissance}}" readonly  required>
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="delevrence" class="form-label">Date delevrence permit</label>
+                            <input type="text" class="form-control" id="delevrence" name="vdelevrence" value="{{delevrence}}" readonly  required>
+                            
+                          </div>
+              
+                          <div class="col-12">
+                            <label for="E-mail" class="form-label">E-mail</label>
+                            <div class="input-group has-validation">
+                              <span class="input-group-text">@</span>
+                              <input type="text" class="form-control" id="E-mail" name="vemail" value="{{email}}" readonly  required>
+                           
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <label for="phone" class="form-label">Numero  du telephone:</label>
+                            <div class="input-group has-validation">
+                              <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                              <input type="text" class="form-control" id="phone" name="vphone" value="{{phone}}" readonly  required>
+                            
+                            </div>
+                          </div>
+              
+                          <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" name="vadresse" readonly value="{{adresse}}"  required>
+                            
+                          </div>
+              
+                          <div class="col-12">
+                            <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" name="vadresse2" value="{{adresse2}}" readonly  >
+                          </div>
+              
+                        <div class="col-md-6">
+                            <label for="pays" class="form-label">Pays :</label>
+                            <input type="text" class="form-control" id="pays" name="vpays" value="{{pays}}" readonly >
+                        </div>
+                        <div class="col-sm-7">
+                          <label for="image" class="form-label">image du justification: </label>
+                          <img src="{{imagepermit}} " class="img-fluid" alt="..." width="350px" >
+                        </div>
+                        <h4 style="text-align: center; padding: 7px;">Donnes du voiture</h4>
+                        <div class="col-sm-3">
+                          <label for="Marque" class="form-label">Marque : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="Marque" name="vmarque" readonly value="{{marque}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="type" class="form-label">Type : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="type" name="vtype" readonly value="{{type}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="Matricule" class="form-label">Matricule : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="Matricule" name="vmatricule" readonly value="{{matricule}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="type carburant" class="form-label">Type carburant : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="type carburant" name="vcarburant" readonly value="{{carburant}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="Boite" class="form-label">Boite vitesse : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="Boite" name="vboite" readonly value="{{boite}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="Model" class="form-label">Model : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="Model" name="vmodel" readonly value="{{model}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="Puissance" class="form-label">Puissance : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="Puissance" name="vpuissance" readonly value="{{puissance}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="disponibilite" class="form-label">disponibilite : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="disponibilite" name="vdisponibilite" readonly value="{{disponibilite}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="charge" class="form-label">date de charge : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="charge" name="vcharge" readonly value="{{charge}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="depot" class="form-label">date de depot : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="depot" name="vdepot" readonly value="{{depot}}">
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="prix" class="form-label">prix total : </label>
+                          <input style="font-weight: bold;" type="text" class="form-control-plaintext" id="prix" name="vpaye" readonly value="{{totalpaye}}">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="imagevoiture" class="form-label">image du voiture: </label>
+                          <img src="{{imagevoiture}} " class="img-fluid" alt="..." width="300px" height="200px">
+                        </div>
+                        </div>
+                        <button class="btn btn-danger"  style="margin-top: 15px;">approve</button>
+                      </form>
+                </div>
+    </div>
+</div>
+</div>
+<div class="container" id="contenent" style="margin-top: 30px; display: none;">
+  <div class="row " id="test"  >
+    <div class="col-12 " >
+      <div style="display: inline-block; "><img src="{% static 'images/imge-casab.ico' %}" alt="" width="130px" height="130px" style="scale: 1;"></div><h3 style="margin-left: 100px; display: inline-block;" >CONTRAT DE LOCATION DE VEHICULE</h3>
+    </div>
+    <div class="col-12  bg-dark" style="margin-top:50px; padding: 7px; font-weight: bold; color: white;">CONDUCTEUR LOCATAIRE (LE CLIENT)</div>
+    <div class="col-12 bg-danger"  >
+      <div  style="border-right: 2px solid black; display: inline-block; width: 300px;" >
+        <p style="margin-top: 10px; font-size: 18px;">Nom :   </p>
+        <p style="margin-top: 10px; font-size: 18px;">Prenom :  </p>
+        <p style="margin-top: 10px; font-size: 18px;">N CIN :   </p>
+        <p style="margin-top: 10px; font-size: 18px;">Date naissance :  </p>
+        <p style="margin-top: 10px; font-size: 18px;">Phone :  </p>
+        
+      </div>
+      <div  style="display: inline-block;">
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">N permit :  </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Date delevrence :  </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Adresse E-email : boulakboudm@gamil.com  </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Adresse personnel :   </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Pays :   </p>
+      </div>
+    </div>
+    <div class="col-12  bg-dark" style=" padding: 7px; font-weight: bold; color: white;">VEHICULE :</div>
+    <div class="col-12 bg-info"  >
+      <div  style="border-right: 2px solid black; display: inline-block; width: 300px;" >
+        <p style="margin-top: 10px; font-size: 18px;">Marque :   </p>
+        <p style="margin-top: 10px; font-size: 18px;">Type :  </p>
+        <p style="margin-top: 10px; font-size: 18px;">Matricule :   </p>
+        <p style="margin-top: 10px; font-size: 18px; ">Type assurance :   </p>
+      </div>
+      <div  style="display: inline-block;">
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Type carburant :  </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Boite vitesse :  </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Puissance :   </p>
+        <p style="margin-top: 10px; font-size: 18px; padding-left: 7px;">Model :  </p>
+      </div>
+    </div>
+    <div class="col-12  bg-dark" style=" padding: 7px; font-weight: bold; color: white;">
+      <div style="display: inline-block; width: 330px">AU DEPART :</div>
+      <div style="display: inline-block; ">AU RETOUR :</div>
+    </div>
+    <div class="col-12 " style="margin: 0px 0px 0px 0px ;">
+      <table class="table table-bordered border-primary" >
+        <thead>
+          
+        </thead>
+        <tbody>
+          <tr>
+            <th style="width: 165px; border: 2px solid black;">AU: 18/19/1998 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DU:18/19/1998 </th>
+            <th style="width: 165px;border: 2px solid black;">Rendu le :18/19/1998</th>
+            
+            
+          </tr>
+          <tr>
+            <th style="width: 165px; border: 2px solid black;">Kilométrage :234567</th>
+            <th style="width: 165px; border: 2px solid black;">Kilométrage :234567</th>
+            
+          </tr>
+          <tr>
+            <th style="width: 165px; border: 2px solid black;">Prix/jour : &nbsp;&nbsp;&nbsp; <span style="color: green;">38493 DH</span> </th>
+            <th style="width: 165px; border: 2px solid black;">Total paye : &nbsp;&nbsp;&nbsp; <span style="color: green;">38493 DH</span> </th>
+          </tr>
+          
+        </tbody>
+      </table>
+      <div class="card" style="width: 20rem;">
+        <img src="..." class="card-img-top" alt="...">
+        
+      </div>
+    </div>
+    <div class="col-12  bg-dark" style=" padding: 7px; margin-top: 10px; font-weight: bold; color: white;">CAUTION (VALEUR DE LA FRANCHISE) :</div>
+    <div class="col-12 bg-success">
+      <div style="margin-top: 30px;">
+        <table class="table table-bordered border-primary" >
+          <thead>
+            <tr>
+              <th style="width: 300px; font-size: 15px; border: 2px solid black;">CB(encaissé) :12346382  &nbsp;&nbsp;&nbsp; Chèque :123456</th>
+              <th style="width: 150px; font-size: 15px; border: 2px solid black;">total caution :</th>
+              <th style="width: 150px; font-size: 15px; border: 2px solid black;">C.N.I N°:</th>
+              
+            </tr>
+          </thead>
+        </table>
+        <p style="text-wrap: wrap; width: auto; padding: 10px;">La franchise est égale au montant de la cau n. En cas de vol ou accident responsable la franchise reste acquise au louer. Le Client déclare 
+          louer, sous son en responsabilité, le véhicule et n’est pas autorisé à le prêter. Le deux roues est assuré tous risques. Le client lisera 
+          le véhicule loué avec soin, réglera tous frais, amendes et dépenses pour toutes infrac s à la circula au sta ement, etc… Le client 
+          n’est pas autorisé à effectuer de répara on sur le véhicule à l’excep on des frais consécu fs à : crevaison, pannes d’électricité.
+        </p>
+        <div style="display: inline-block; width: 50%;  height: 150px;">
+          <p style="margin-left: 20px;">Date et heure de réception du véhicule:</p>
+          <p style="margin-left: 20px;">Signature Client:</p>
+        </div>
+        <div style="display: inline-block;  width: 49%; height: 150px; text-align: center;">
+          <p style="margin-left: 20px;">Date et heure de livraison du véhicule:</p>
+          <p style="margin-left: 20px;">Signature Loueur:</p>
+        </div>
+        <div class="card" style="width: 20rem;">
+          <img src="..." class="card-img-top" alt="...">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-end " style="margin-top: 25px;">
+    <div class="col-12 ">
+      <h3 style="text-align: center; font-weight: bold;">ETAT DU VEHICULE</h3>
+      <div class="text-center">
+        <img src="{% static 'images/contrat.jpg' %}" class="rounded w-100 h-100" alt="...">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <h3 style="text-align: center;">LE VEHICULE LOUE</h3>
+      <h5 id="x">Etat du véhicule</h5>
+      <p id="x">Un état descriptif du véhicule est joint à votre contrat. Vous vous engagez à y consigner par écrit, avant votre départ de la station, toute défectuosité apparente qui n'y figurerait pas. A défaut, nous sommes réputés avoir délivré un véhicule conforme à l'état descriptif. Nous ne pourrons malheureusement pas tenir compte de réclamations concernant des dégâts apparents qui n'auront pas été signalés au moment du départ. Vous devez rendre le véhicule dans l'état où vous l'avez reçu. Tous frais de remise en état, consécutifs à une faute du locataire ou en l'absence de faute d'un tiers identifié, viendront en surcharge du coût de la location, sous réserve des stipulations de la section "garanties contractuelles optionnelles".</p>
+      <h5 id="x">Usage du véhicule</h5>
+      <p id="x">
+            Vous ne devez jamais faire circuler le véhicule ailleurs que sur le Territoire.
+
+            Conformément au principe de personnalité des peines, vous êtes responsable des infractions commises pendant la durée de la location. Ainsi, vous êtes informés que vos coordonnées pourront être communiquées aux autorités de police qui en feraient la demande.
+
+            Vous vous engagez à utiliser le véhicule en "bon père de famille" et notamment, sans être sous influence éthylique ou narcotique ou de toute substance susceptible d'affecter la conduite conformément aux dispositions du code de la Route et l'utiliser conformément à sa destination, ce qui, pour un véhicule particulier, est principalement celle du transport de personnes à titre gratuit et pour un véhicule utilitaire, est principalement celle du transport de marchandises.
+
+            Dans le cas où les conditions d'utilisation du véhicule loué relèvent d'une réglementation spécifique, vous êtes responsable du respect de cette réglementation tout au long du contrat. De plus, toute infraction à cette réglementation oblige le Locataire à indemniser le Loueur de tout préjudice que ce dernier pourrait subir. Nous attirons tout particulièrement votre attention sur les dimensions des véhicules utilitaires (figurant à l'intérieur de l'habitacle et sur la fiche "état du véhicule" pour la hauteur) qui obligent à une attention accrue lors de certaines manœuvres (marche arrière par exemple) et peuvent rendre impossible le franchissement de certaines infrastructures routières (tunnels, ponts, etc.), dont la hauteur maximum est, suivant la réglementation en vigueur, signalée en avance.
+      </p>
+      <h4 id="x">attention</h4>
+      <p id="x">En cas de mauvaise appréciation du gabarit du véhicule, les chocs hauts de caisse et sous caisse ne sont pas couverts par la garantie dommages sauf à prouver le cas de force majeure. Vous ne devez pas vous servir du véhicule loué notamment :</p>
+      <ol >
+        <li id="x">Pour le relouer;</li>
+        <li id="x"> Pour le transport de personnes à titre onéreux;</li>
+        <li id="x"> Pour le transport d'un nombre de personnes supérieures à celui mentionné sur la carte grise du véhicule;</li>
+        <li id="x"> Pour participer à des rallyes, compétitions ou essais, quel que soit le lieu et les conditions;</li>
+        <li id="x"> Pour dispenser des cours de conduite;</li>
+        <li id="x">Pour pousser ou tirer un autre véhicule (sauf véhicules équipés d'un crochet - charge maximale de 1000 kg) ;</li>
+        <li id="x"> Pour des routes non carrossables ou dont la surface ou l'état d'entretien présente des risques pour les pneus ou les organes sous le véhicule;</li>
+        <li id="x">Pour commettre une infraction intentionnelle;</li>
+        <li id="x"> Les marchandises et bagages transportés dans le véhicule, y compris leur emballage ou leur arrimage, ne doivent ni détériorer le véhicule, ni faire courir de risques anormaux à ses occupants;</li>
+        <li id="x">En cas de dommage ou de vol, vous devez transmettre au Loueur, dans un délai n'excédant pas 2 jours, le constat amiable d'accident ou le récépissé de déclaration de vol remis par les autorités, ainsi que les clés et papiers du véhicule.</li>
+      </ol>
+      <p id="x"><h4 id="x">attention:</h4> le présent article énonce les obligations minimales à respecter pendant la période durant laquelle vous avez la garde du véhicule.</p>
+      <h3 id="x">Entretien / Problème mécanique</h3>
+      <p id="x">Au cours de votre location et en fonction du nombre de kilomètres parcourus, vous aurez à effectuer les contrôles d'usage (niveau d'huile moteur, niveau d’eau, pression des pneus, etc.), conformément à un usage de "bon père de famille". A ce titre, le Locataire restera vigilant à tout signal émis par les voyants d'alerte apparaissant sur le tableau de bord du véhicule, le cas échéant, et prendra toutes les mesures conservatoires nécessaires, s'il y a lieu, telles que l'arrêt d'urgence.
+
+        Le véhicule vous est fourni avec des pneumatiques dont l'état et le nombre sont conformes à la règlementation routière. En cas de détérioration de l'un d'entre eux pour une cause autre que l'usure normale, vice caché ou cas de force majeure, vous vous engagez à le remplacer immédiatement et à vos frais par un pneumatique de même dimension, même type, même marque, et d'usure égale. En cas de panne mécanique ou d'accident, vous bénéficiez d'un Service assistance, inclus dans le prix de votre location. Les conditions de cette assistance vous sont exposées dans la plaquette "Conditions d'Assurance, d'Assistance et Conseils Utiles" mise à votre disposition dans toutes les agences.
+        
+        Si le compteur kilométrique n'a pas fonctionné pour une cause autre qu'une défaillance technique, le locataire devra payer l'indemnité kilométrique calculée sur la base de 100 kilomètres par jour de location. Toute transformation ou intervention mécanique sur le véhicule est interdite sans autorisation préalable du Loueur.
+      </p>
+      <h3 id="x">DUREE DE LA LOCATION</h3>
+      <h4 id="x">Notion et calcul</h4>
+      <p id="x">La durée d'un contrat de location est de 30 jours maximum. Le locataire s'engage à restituer le véhicule au Loueur à la date prévue au contrat de location sous peine de s'exposer à des poursuites judiciaires civiles et pénales. La durée de location se calcule par tranche de 24 heures, non fractionnable, depuis l'heure de mise à disposition du véhicule.</p>
+      <ol>
+        <p id="x">Si vous souhaitez renouveler le contrat, il vous appartiendra :</p>
+        <li id="x">De vous rendre, avec le véhicule prioritairement dans l'agence HERTZ de départ, à défaut dans l’agence la plus proche;</li>
+        <li id="x">D'effectuer un contrôle du véhicule avec l'agent HERTZ;</li>
+        <li id="x">De régler le loyer et charges complémentaires à la fermeture du contrat échu et de signer un nouveau contrat.</li>
+
+      </ol>
+      <p id="x">
+        Le renouvellement d'un contrat mensuel est strictement soumis aux stipulations qui précèdent. De plus, le non-respect par le Locataire de ces stipulations pour les locations mensuelles le rendra automatiquement redevable vis-à-vis du Loueur d'une astreinte conventionnelle de cinq cent (500) MAD TTC par jour de conservation du véhicule au-delà de la date d'échéance du contrat, en plus du coût de la location et sans préjudice, pour le Loueur, de toute action civile et/ou pénale qui lui serait ouverte sur le fondement de la non restitution du véhicule.
+      </p>
+      <h3 id="x">Retard dans la prise du véhicule</h3>
+      <p id="x">La réservation sera retenue jusqu'à deux heures après l'heure de prise en charge prévue, à moins que vous n’ayez contacté la centrale de réservation pour changer votre heure d'arrivée. Passé ce délai de deux heures, le véhicule sera mis à disposition d'autres clients. Si vous arrivez après les deux heures, nous ferons notre possible pour vous fournir un véhicule, mais la disponibilité ne pourra pas être garantie.</p>
+      <h3 id="x">RESTITUTION DES VEHICULES</h3>
+      <p id="x">
+        La location se termine par la restitution du véhicule et de ses clefs sur le parc à un agent en tenue. La restitution du véhicule doit être effectuée pendant les heures d’ouverture de l’agence HERTZ; Seule la prise de possession du véhicule, des documents et des clefs par l'agent du Loueur, aux heures d'ouverture de l'agence concernée, permet de mettre fin au contrat de location.
+
+        Si vous êtes légèrement en retard pour restituer le véhicule, nous vous accordons une prorogation de 59 minutes, passée cette « Période de grâce », vous devrez payer une journée supplémentaire.
+
+        Tout véhicule restitué en dehors des heures d’ouverture demeure sous la responsabilité du locataire. L’heure de restitution du véhicule pour fermer le contrat et déterminer le montant de la facture, sera l’heure de la prochaine ouverture de l’agence.
+
+        Dans l'hypothèse où le véhicule serait restitué sans ses clés, celles-ci seront facturées au locataire ainsi que, s'il y a lieu, les frais de rapatriement et d’immobilisation du véhicule.
+
+        Le Loueur ne peut en aucune façon être tenu responsable des biens qui auraient été oubliés dans les véhicules à l'issue de la location.
+      </p >
+      <h3 id="x">RESILIATION DU CONTRAT</h3>
+      <p id="x">En cas de confiscation ou de mise sous scellés du véhicule, le contrat de location pourra être résilié de plein droit dès que le loueur en sera informé par les autorités judiciaires ou par le locataire.
+
+        Toute utilisation du véhicule qui porterait préjudice au loueur autoriserait celui-ci à résilier de plein droit le contrat. En cas de vol, le contrat de location est arrêté dès transmission au loueur du dépôt de plainte effectué par le locataire auprès des autorités compétentes.
+      </p>
+      <div style="display: inline-block; width: 50%; font-weight: bold;">Lire le : 18/23/2022</div>
+      <div style="display: inline-block; font-weight: bold;">Signature Client:</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<script>
+ let edit_profile=document.getElementsByClassName('edit-profile')[0]
+  let inpt=document.getElementsByClassName('form-control')
+  edit_profile.onclick=function(){
+    for(i=0;i<=inpt.length;i++){
+      inpt[i].removeAttribute('readonly')
+
+    }
+  }
+  
+
+
+  function imprimerPartie() {
+            // Sélectionne la partie de la page que vous souhaitez imprimer
+            
+            //var test=document.getElementById('test')
+            //test.style.display='block'
+            var cont = document.getElementById("contenent")
+            cont.style.display='block'
+            var contenu = document.getElementById("contenent").innerHTML;
+            // Crée une nouvelle fenêtre d'impression
+            var fenetreImpression = window.open('', '', 'height=1000,width=1000');
+            fenetreImpression.document.write('<html><head><title>Imprimer</title></head><body>');
+            fenetreImpression.document.write(contenu);
+            fenetreImpression.document.write('</body></html>');
+            fenetreImpression.document.close();
+
+            // Attend que le contenu soit chargé dans la nouvelle fenêtre, puis imprime
+            fenetreImpression.onload = function() {
+                fenetreImpression.print();
+            };
+            cont.style.display='none'
+          }
+        
+  
+</script>
+
+
+
+
+
+
+
+           <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+           <script src="{% static 'js/bootstrap.min.js' %}"></script>
+           
+</body>
+</html>

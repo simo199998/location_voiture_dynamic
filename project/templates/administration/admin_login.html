@@ -1,0 +1,80 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Administration  </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <style>
+   .bg-image-vertical {
+position: relative;
+overflow: hidden;
+background-repeat: no-repeat;
+background-position: right center;
+background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+.h-custom-2 {
+height: 100%;
+}
+}
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6" style="height: 300px;">
+        <div style="margin-top: 100px; text-align: center;"><img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 3; margin-left: 50px;" ></div>
+        <div><h2>Admin Login</h2></div>
+        <div>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success" style="width: 300px;">Login</button>
+            </form>
+            {% if form.errors %}
+            <ul>
+                        {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div style="margin-top: 100px;"><img src="{% static 'images/clienthappy.jpeg' %}" alt="" class="img-thumbnail " width="600px" height="650px"></div>
+      </div>
+    </div>
+  </div>
+ 
+ 
+    <script src="{% static 'administration/js/jquery.min.js' %}"></script>
+    <script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+  </body>
+</html>
+
+
+<!--
+  <h2>Admin Login</h2>
+                        <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Login</button>
+                        </form>
+                        {% if form.errors %}
+                        <ul>
+                                    {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                        </ul>
+                        {% endif %}
+                        </div>
+-->

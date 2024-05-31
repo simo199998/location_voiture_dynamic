@@ -1,0 +1,167 @@
+body{
+            font-family: 'Barlow', sans-serif;
+             /*background-color: #0A1828;*/
+            margin: 0px 0px 0px 0px;
+}
+#title-bar p{
+            font-size: 12px;
+}
+.play-button {
+            position:absolute;
+            top: 100%;
+            left: 70px;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color:green;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+.play-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-25%, -50%);
+            margin-left: 0px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid white;
+        }
+.title-play-button{
+            position: relative;
+            left: 120px;
+            top: 18px;
+            text-decoration: underline;
+}
+#text-client::before{
+    content: "\f10d";
+      font-size: 25px;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      color: #E81C2E;
+      margin-right: 10px;
+}
+
+.gallery {
+    --s: 190px; /* the image size */
+    
+    display: grid;
+    transform-style: preserve-3d;
+    animation: r 15s linear infinite;
+    position: relative;
+    bottom: 100px;
+  }
+  @keyframes r {
+    0% {transform: perspective(450px) rotateX(-100deg) rotate(0deg)}
+    to {transform: perspective(450px) rotateX(-100deg) rotate(-360deg)}
+  }
+  .gallery > img {
+    grid-area: 1/1;
+    width: var(--s);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transform: rotate(var(--_a)) translateY(120%) rotateX(90deg);
+  }
+  .gallery > img:nth-child(1) {--_a: 0deg}
+  .gallery > img:nth-child(2) {--_a: 60deg}
+  .gallery > img:nth-child(3) {--_a: 120deg}
+  .gallery > img:nth-child(4) {--_a: 180deg}
+  .gallery > img:nth-child(5) {--_a: 240deg}
+  .gallery > img:nth-child(6) {--_a: 300deg}
+  
+  .gallery::before {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    clip-path: polygon(50% 0,calc(50% + .866*50%) 25%,calc(50% + .866*50%) 75%,50% 100%,calc(50% - .866*50%) 75%,calc(50% - .866*50%) 25%);
+    background: #99B2B7;
+    background-color: #178582;
+    transform: translateZ(calc(var(--s)/2)) rotate(90deg);
+  }
+  
+  #test{
+    background-color: #178582;
+    margin: 0;
+
+    display: grid;
+    place-content: center;
+ 
+    overflow: hidden;
+  }
+
+#contact i{
+    color: skyblue;
+}
+.icon i{
+    font-size: 40px;
+    font-weight: bold;
+}
+.icon span{
+    font-size: 40px;
+    font-weight: bold;
+}
+.icon-text{
+    font-size: 18px;
+    font-weight: bold;
+}
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 0px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding-left:20px;
+  font-size: 14px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -15px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -15px;
+  content: "✖";
+}
+.correct1{
+  display: none;
+}
+
+.correct{
+  padding-top: 6px;
+  display: block;
+  color: green;
+}
+.incorrect1{
+  display:none;
+}
+.incorrect{
+  padding-top: 6px;
+  display:block;
+  color: red;
+}
+/*-------------------*/
+#profile-icon:hover{
+  border-left: 8px solid #21D192;
+}
+.dropdown-item:hover{background-color: #21D192;}
+.nav-item:hover{background-color: #21D192;}

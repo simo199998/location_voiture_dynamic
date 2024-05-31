@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Administration  </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+<style>
+  .navbar{
+      margin-top: 0px;
+      background-color: green;
+      height: 80px;
+    }
+  </style>
+</style>
+</head>
+<body>
+  <div id="main-wrapper">
+    
+    <div class="template-page-wrapper">
+      <div class="navbar-collapse collapse templatemo-sidebar">
+        <ul class="templatemo-sidebar-menu">
+          <li>
+            <img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 2.5; margin-left: 50px;" >
+          </li>
+          <li ><a href="{% url 'reservation_statistiques' %}"><i class="fa-solid fa-chart-simple"></i>tableau de bord</a></li>
+          <li ><a href="{% url 'index' %}"><i class="fa fa-home"></i>home</a></li>
+          <li><a href="{% url 'demmande' %}"><i class="fa-sharp fa-solid fa-bell"></i><span class="badge pull-right">3</span> Demmandes des reservation</a></li>
+          
+          <li><a href="{% url 'ajoute_voiture' %}"><i class="fa-solid fa-plus"></i>Ajoute une nouveau voitures</a></li>
+          <li><a href="{% url 'voitures' %}"><i class="fa-solid fa-car"></i>Les voitures</a></li>
+          <li><a href="{% url 'document_vehicule_view' %}"><i class="fa-sharp fa-solid fa-file"></i>Les documents</a></li>
+          <li><a href=""><i class="fa fa-cog"></i>les clients</a></li>
+          
+          <li><a href="" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+        </ul>
+      </div>
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+         
+          <div class="row margin-bottom-30">
+            <div class="col-md-12">
+              <ul class="nav nav-pills">
+                <li class="active"><a href="#">creation nouveau demmande <span class="badge">42</span></a></li>
+                <li><a href="#">Commande Active <span class="badge">107</span></a></li>
+                <li><a href="#">Total voitures disponible <span class="badge">{{totalcars}}</span></a></li>
+              </ul>          
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-md-12">
+                        <form role="form" id="templatemo-preferences-form">
+                                    <div class="row">
+                                      <div class="col-md-3 margin-bottom-15">
+                                        <label for="marque" class="control-label">Marque</label>
+                                        <input type="text" class="form-control" id="marque" readonly value="{{voiture.marque}}">                  
+                                      </div>
+                                      <div class="col-md-3 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Type</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{voiture.type}}">                 
+                                      </div>
+                                      <div class="col-md-3 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Matricule</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{voiture.matricule}}">                 
+                                      </div>
+                                      <div class="col-md-3 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Puissance fiscal</label>
+                                        <input type="number" class="form-control" id="lastName" readonly value="{{voiture.puissance_fiscale}}">                 
+                                      </div>
+                                      <div class="col-md-3 margin-bottom-15">
+                                                <label for="lastName" class="control-label">Type de carburant</label>
+                                                <input type="text" class="form-control" id="lastName" readonly value="{{voiture.type_carburant}}">                 
+                                       </div>
+                                       <div class="col-md-3 margin-bottom-15">
+                                                <label for="lastName" class="control-label">Boite vitesse</label>
+                                                <input type="text" class="form-control" id="lastName" readonly value="{{voiture.boite_vitesse}}">                 
+                                         </div>
+                                        <div class="col-md-3 margin-bottom-15">
+                                                <label for="lastName" class="control-label">Model</label>
+                                                <input type="text" class="form-control" id="lastName" readonly value="{{voiture.model}}">                 
+                                        </div>
+                                        <div class="col-md-3 margin-bottom-15">
+                                                <label for="lastName" class="control-label">Prix/jour</label>
+                                                <input type="text" class="form-control" id="lastName" readonly value="{{voiture.prix}}" >                 
+                                        </div>
+                                        <div class="col-md-3 margin-bottom-15">
+                                                <label for="lastName" class="control-label">Type assurance</label>
+                                                <input type="text" class="form-control" id="lastName" readonly value="{{assurance.type_assurance}}">                 
+                                        </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date debut assurance</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{assurance.date_debut}}">                 
+                                      </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date fin assurance</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{assurance.date_fin}}">                 
+                                      </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date debut viste tichnique</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{visite.date_debut}}">                 
+                                      </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date fine viste tichniquee</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{visite.date_fin}}">                 
+                                      </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date debut vignette</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{vignette.date_debut}}">                 
+                                      </div>
+                                      <div class="col-md-4 margin-bottom-15">
+                                        <label for="lastName" class="control-label">Date fine vignette</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="{{vignette.date_fin}}">                 
+                                      </div>
+                                      <div class="col-md-3 margin-bottom-15">
+                                        <label for="singleSelect">State mecanique</label>
+                                        <input type="text" class="form-control" id="lastName" readonly value="Henry">
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <div class="col-md-3 margin-bottom-15">
+                                                <label for="image">image de voiture</label>
+                                                <img src="{{voiture.image.url}}" alt="" width="300px" height="200px">
+                                       </div>
+                                  </div>
+                                  <div class="row templatemo-form-buttons">
+                                    <div class="col-md-12">
+                                      <a href="{% url 'update_voiture' voiture.pk %}" class="btn btn-primary">modification</a>
+                                      <a href="{% url 'voitures' %}" class="btn btn-success">retour</a>    
+                                    </div>
+                                  </div>
+                                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+            </div>
+            <div class="modal-footer">
+              <a href="sign-in.html" class="btn btn-primary">Yes</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="templatemo-footer" 
+      >
+        <div class="templatemo-copyright">
+          <p>Copyright &copy; 2084 Your Company Name</p>
+        </div>
+      </footer>
+    </div>
+</div>
+  <SCript>
+    let dispo=document.getElementsByClassName('disponibilite');
+    
+    for(i=0;i<=dispo.length;i++){
+      if(dispo[i].innerHTML=='oui'){dispo[i].style.color="green"}
+      else{dispo[i].style.color="red"}}
+  </SCript>
+    <script src="{% static 'administration/js/jquery.min.js' %}"></script>
+    <script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+  </body>
+</html>

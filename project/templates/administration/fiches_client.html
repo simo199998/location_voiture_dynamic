@@ -1,0 +1,125 @@
+<!--{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+
+  <title>fiche des clients</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+
+</head>
+<body>
+  <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+      <div class="logo"><a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/imge-casab.ico' %}" alt="" width="50px" height="40px" style="scale: 1;">&nbsp;&nbsp;Administration</a></div>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> 
+    </div>   
+  </div>
+    <div class="template-page-wrapper">
+      <div class="navbar-collapse collapse templatemo-sidebar">
+        <ul class="templatemo-sidebar-menu">
+          <li>
+            <form class="navbar-form">
+              <input type="text" class="form-control" id="templatemo_search_box" placeholder="Search...">
+              <span class="btn btn-default">Go</span>
+            </form>
+          </li>
+          <li class="active"><a href="{% url 'home' %}"><i class="fa fa-home"></i>home</a></li>
+          <li><a href="{% url 'fiches_client' %}"><i class="fa fa-home"></i><span class="badge pull-right"> {{totaldemandes}} </span>Demmandes en ligne</a></li>
+          <li ><a href="{% url 'notification' %}"><i class="fa fa-users"></i><span class="badge pull-right"> 10 </span>Notification</a></li>
+          
+          <li><a href="{% url 'nouveu-voiture' %}"><i class="fa fa-cog"></i>ajoute nouveau voitures</a></li>
+          <li><a href="{% url 'clients' %}"><i class="fa fa-cog"></i>les clients</a></li>
+          
+          <li><a href="{% url 'sign-in' %}" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+        </ul>
+      </div>
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+          <div class="row">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="btn-group pull-right" id="templatemo_sort_btn">
+                  <button type="button" class="btn btn-default">Sortez par</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Nom</a></li>
+                    <li><a href="#">Prenom</a></li>
+                    <li><a href="#">Numero CIN</a></li>
+                    <li><a href="#">Numero du Voiture</a></li>
+                  </ul>
+                </div>
+                <div class="table-responsive">
+                  <h4 class="margin-bottom-15">les fiche des clients</h4>
+                  <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th>order</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Numero CIN</th>
+                        <th>Email</th>
+                        <th>Matricule</th>
+                        <th>phone</th>
+                        <th>Edit</th>
+                        <th>Action</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for demmande in demmandes %}
+                      
+                      <tr>
+                            
+                              <td>{{demmande.donne.id}}</td>
+                              <td>{{demmande.donne.ajnom}}</td>
+                              <td>{{demmande.donne.ajprenom}}</td>
+                              <td>{{demmande.donne.ajcin}}</td>
+                              <td>{{demmande.donne.ajemail}}</td>
+                              <td>{{demmande.donne.voiturereserve}}</td>
+                              <td>{{demmande.donne.ajphone}}</td>
+                              <td><form action="{% url 'get_id' %}" method="post">
+                                  {% csrf_token %}
+                                   <input type="text" name="get_id" value="{{demmande.donne.id}}" style="display: none;">
+                                   <button class="btn btn-default">Edit</button>
+
+                                   </form>
+                              </td>                    
+                              <td><button class="btn btn-success">approve</button></td>
+                              <td><button class="btn btn-danger">delete</button></td>
+                          
+                      </tr>
+                      {% endfor %}                 
+                    </tbody>
+                  </table>
+                </div>
+      
+      
+      
+    </div>
+    <script>
+      
+    </script>\
+
+<script src="{% static 'administration/js/jquery.min.js' %}"></script>
+<script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+    <script src="{% static 'administartion/js/Chart.min.js' %}"></script>
+    
+    <script type="{% static 'text/javascript' %}">
+    // Line chart
+    
+  </script>
+</body>
+</html>-->

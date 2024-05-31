@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+  <title>voitures</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <style>
+   form {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.forms{
+  margin-left: 200px;
+  margin-top: 0px;
+}
+.navbar{
+      margin-top: 0px;
+      background-color: green;
+      height: 80px;
+    }
+  </style>
+  </style>
+
+
+</head>
+<body>
+  <div id="main-wrapper">
+    
+    <div class="template-page-wrapper">
+      <div class="navbar-collapse collapse templatemo-sidebar">
+        <ul class="templatemo-sidebar-menu">
+          <li>
+            <img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 2.5; margin-left: 50px;" >
+          </li>
+          <li ><a href="{% url 'reservation_statistiques' %}"><i class="fa-solid fa-chart-simple"></i>tableau de bord</a></li>
+          <li ><a href="{% url 'index' %}"><i class="fa fa-home"></i>home</a></li>
+          <li><a href="{% url 'demmande' %}"><i class="fa-sharp fa-solid fa-bell"></i><span class="badge pull-right">3</span> Demmandes des reservation</a></li>
+          
+          <li class="active"><a href="{% url 'ajoute_voiture' %}"><i class="fa-solid fa-plus"></i>Ajoute une nouveau voitures</a></li>
+          <li><a href="{% url 'voitures' %}"><i class="fa-solid fa-car"></i>Les voitures</a></li>
+          <li><a href="{% url 'document_vehicule_view' %}"><i class="fa-sharp fa-solid fa-file"></i>Les documents</a></li>
+          <li><a href=""><i class="fa fa-cog"></i>les clients</a></li>
+          
+          <li><a href="" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+          
+          <h1 style="color: #28a745; text-align: center; margin-top: 0px; font-weight: bold;">Ajoute une nouvelle voitures</h1>
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container">
+                <div class="forms">
+                  
+                  <form method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          {{ voiture_form.non_field_errors }}
+                          <div class="form-group">
+                              {{ voiture_form.marque.label_tag }}
+                              {{ voiture_form.marque }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.type.label_tag }}
+                              {{ voiture_form.type }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.matricule.label_tag }}
+                              {{ voiture_form.matricule }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.date_achat.label_tag }}
+                              {{ voiture_form.date_achat }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.image.label_tag }}
+                              {{ voiture_form.image }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.puissance_fiscale.label_tag }}
+                              {{ voiture_form.puissance_fiscale }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.type_carburant.label_tag }}
+                              {{ voiture_form.type_carburant }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.boite_vitesse.label_tag }}
+                              {{ voiture_form.boite_vitesse }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.model.label_tag }}
+                              {{ voiture_form.model }}
+                          </div>
+                          <div class="form-group">
+                              {{ voiture_form.montant_achat.label_tag }}
+                              {{ voiture_form.montant_achat }}
+                          </div>
+                          <div class="form-group">
+                            {{ voiture_form.prix.label_tag }}
+                            {{ voiture_form.prix }}
+                        </div>
+                          <div class="form-group">
+                            {{ voiture_form.statut_mecanique.label_tag }}
+                            {{ voiture_form.statut_mecanique }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          {{ assurance_form.non_field_errors }}
+                          <div class="form-group">
+                              {{ assurance_form.date_debut.label_tag }}
+                              {{ assurance_form.date_debut }}
+                          </div>
+                          <div class="form-group">
+                              {{ assurance_form.date_fin.label_tag }}
+                              {{ assurance_form.date_fin }}
+                          </div>
+                          <div class="form-group">
+                              {{ assurance_form.type_assurance.label_tag }}
+                              {{ assurance_form.type_assurance }}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          {{ visite_technique_form.non_field_errors }}
+                          <div class="form-group">
+                              {{ visite_technique_form.date_debut.label_tag }}
+                              {{ visite_technique_form.date_debut }}
+                          </div>
+                          <div class="form-group">
+                              {{ visite_technique_form.date_fin.label_tag }}
+                              {{ visite_technique_form.date_fin }}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          {{ vignette_form.non_field_errors }}
+                          <div class="form-group">
+                              {{ vignette_form.date_debut.label_tag }}
+                              {{ vignette_form.date_debut }}
+                          </div>
+                          <div class="form-group">
+                              {{ vignette_form.date_fin.label_tag }}
+                              {{ vignette_form.date_fin }}
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Ajouter Voiture</button>
+                  </form>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+          </div>
+          <div class="modal-footer">
+            <a href="sign-in.html" class="btn btn-primary">Yes</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2084 Your Company Name <!-- Credit: www.templatemo.com --></p>
+      </div>
+    </footer>
+  </div>
+</div>
+<script src="{% static 'administration/js/jquery.min.js' %}"></script>
+<script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+<script src="{% static 'administartion/js/Chart.min.js' %}"></script>
+</body>
+</html>

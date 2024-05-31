@@ -1,0 +1,142 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Administration  </title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="{% static 'administration/css/templatemo_main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <style>
+    .navbar{
+      margin-top: 0px;
+      background-color: green;
+      height: 80px;
+    }
+  </style>
+  </style>
+
+</head>
+<body>
+  <div id="main-wrapper">
+    
+    <div class="template-page-wrapper">
+      <div class="navbar-collapse collapse templatemo-sidebar">
+        <ul class="templatemo-sidebar-menu">
+          <li>
+            <img src="{% static 'images/LVD-logo-Transparent2.ico' %}" alt="" width="70px" height="60px" style="scale: 2.5; margin-left: 50px;" >
+          </li>
+          <li ><a href="{% url 'reservation_statistiques' %}"><i class="fa-solid fa-chart-simple"></i>tableau de bord</a></li>
+          <li ><a href="{% url 'index' %}"><i class="fa fa-home"></i>home</a></li>
+          <li><a href="{% url 'demmande' %}"><i class="fa-sharp fa-solid fa-bell"></i><span class="badge pull-right">3</span> Demmandes des reservation</a></li>
+          
+          <li><a href="{% url 'ajoute_voiture' %}"><i class="fa-solid fa-plus"></i>Ajoute une nouveau voitures</a></li>
+          <li><a href="{% url 'voitures' %}"><i class="fa-solid fa-car"></i>Les voitures</a></li>
+          <li><a href="{% url 'document_vehicule_view' %}"><i class="fa-sharp fa-solid fa-file"></i>Les documents</a></li>
+          <li><a href=""><i class="fa fa-cog"></i>les clients</a></li>
+          
+          <li><a href="" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+        </ul>
+      </div>
+
+      <div class="templatemo-content-wrapper">
+        <div class="templatemo-content">
+         
+          <div class="row margin-bottom-30">
+            <div class="col-md-12">
+              <ul class="nav nav-pills">
+                <li class="active"><a href="#">creation nouveau demmande <span class="badge">42</span></a></li>
+                <li><a href="#">Commande Active <span class="badge">{{commande_count}}</span></a></li>
+                <li><a href="#">Total voitures disponible <span class="badge"> {{available_count}} </span></a></li>
+              </ul>          
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-md-12">
+              <div class="btn-group pull-right" id="templatemo_sort_btn">
+                <button type="button" class="btn btn-default">Sortez par</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Nom</a></li>
+                  <li><a href="#">Prenom</a></li>
+                  <li><a href="#">Numero CIN</a></li>
+                  <li><a href="#">Numero du Voiture</a></li>
+                </ul>
+              </div>
+              
+              <div class="table-responsive">
+                        <h1>Mettre à jour les documents pour {{ voiture.marque }} {{ voiture.type }}</h1>
+    
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            {% if assurance_form %}
+                            <h2>Assurance</h2>
+                            {{ assurance_form.as_p }}
+                            {% else %}
+                            <p>Aucune assurance à mettre à jour.</p>
+                            {% endif %}
+                            
+                            {% if visite_technique_form %}
+                            <h2>Visite Technique</h2>
+                            {{ visite_technique_form.as_p }}
+                            {% else %}
+                            <p>Aucune visite technique à mettre à jour.</p>
+                            {% endif %}
+                            
+                            {% if vignette_form %}
+                            <h2>Vignette</h2>
+                            {{ vignette_form.as_p }}
+                            {% else %}
+                            <p>Aucune vignette à mettre à jour.</p>
+                            {% endif %}
+                            
+                            <button type="submit">Mettre à jour</button>
+                        </form>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+            </div>
+            <div class="modal-footer">
+              <a href="sign-in.html" class="btn btn-primary">Yes</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="templatemo-footer" 
+      >
+        <div class="templatemo-copyright">
+          <p>Copyright &copy; 2084 Your Company Name</p>
+        </div>
+      </footer>
+    </div>
+</div>
+ 
+    <script src="{% static 'administration/js/jquery.min.js' %}"></script>
+    <script src="{% static 'administration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'administration/js/templatemo_script.js' %}"></script>
+  </body>
+</html>
+
+

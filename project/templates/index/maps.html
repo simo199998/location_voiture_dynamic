@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block container %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>map</title>
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            
+            <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            <script src="{% static 'js/owl.carousel.js' %}"></script>
+    
+
+   
+<body>
+
+  
+  <div class="container">
+    <section class="text-center">
+
+
+      <h3 class="mb-5" style="margin-top: 30px; font-weight: bold;">Notre agence</h3>
+    
+      <div class="row">
+        <div class="col-12" style="height: 400px;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13229.626001910443!2d-6.86006266239524!3d34.00777521712245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76d83d6df77dd%3A0x98c36acaf9a9241f!2sHard%20car!5e0!3m2!1sfr!2sma!4v1714827521516!5m2!1sfr!2sma" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <h3 class="mb-5" style="padding-top: 15px;">Contact us</h3>
+        <div class="col-lg-7" style="padding: 20px;">
+          <form>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row mb-4">
+                  <div class="col-md-6 mb-4 mb-md-0">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="form3Example1">Nom & Prenom</label>
+                      <input type="text" id="form3Example1" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="form3Example2">Email Address</label>
+                      <input type="email" id="form3Example2" class="form-control" />
+                      
+                    </div>
+                  </div>
+                </div>
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Subject</label>
+                  <input type="text" id="form3Example3" class="form-control" />
+                  
+                </div>
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form4Example3">Message</label>
+                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                  
+                </div>
+                <div class="text-center text-md-start">
+                  <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary mb-5 mb-md-0">
+                    Send
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <ul class="list-unstyled">
+                  <li>
+                    <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                    <p><small> Campus Agdal: 22,Avenue Omar Ibn Al khattab, Agdal-Rabat</small></p>
+                  </li>
+                  <li>
+                    <i class="fas fa-phone fa-2x text-primary"></i>
+                    <p><small>+212 70 84 28 603</small></p>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope fa-2x text-primary"></i>
+                    <p><small>contact@gmail.com</small></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+    
+        </div>
+      </div>
+    
+    
+    </section>
+  </div>
+  
+
+
+
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/cheatsheet.js' %}"></script>
+  <script src="{% static 'js/form-validation.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js/scrollax.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+</body>
+</html>
+{% endblock container %}

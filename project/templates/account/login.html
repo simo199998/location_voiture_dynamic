@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block reservation %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>login</title>
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+            
+            <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            
+            
+            
+  
+ 
+   
+<body>
+            <div class="container">
+                        <div class="row justify-content-center">
+                                    <div class="col-6" style="margin-top: 30px;">
+                                                <div class="text-center">
+                                                            <img src="{% static 'images/LVD-logo-Transparent2.ico'  %}" alt="" width="80px" height="60px" style="scale: 2.9;">
+                                                            
+                                                </div>
+                                                <form method="post">
+                                                            {% csrf_token %}
+                                                            {{ form.as_p }}
+                                                            <button type="submit" class="btn btn-success w-100">Login</button>
+                                                </form>
+                                                <div class="text-center">
+                                                            <p>Vous n’êtes pas membre ?  <a href="{% url 'register' %}">Register</a></p>
+                                                            <p>Ou inscrivez-vous avec:</p>
+                                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                                              <i class="fab fa-facebook-f"></i>
+                                                            </button>
+                                                        
+                                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                                              <i class="fab fa-google"></i>
+                                                            </button>
+                                                        
+                                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                                              <i class="fab fa-twitter"></i>
+                                                            </button>
+                                                        
+                                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                                                              <i class="fab fa-github"></i>
+                                                            </button>
+                                                </div>
+                                    </div>
+                        </div>
+            </div>
+
+
+
+
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+
+
+
+
+
+
+<script src="{% static 'js/main.js' %}"></script>
+            
+</body>
+</html>
+{% endblock reservation %}
